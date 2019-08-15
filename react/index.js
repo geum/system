@@ -1,6 +1,6 @@
-import '@system/index.scss';
+import '@root/index.scss';
 
-import System from '@system/System';
+import System from '@root/System';
 
 export {
   System

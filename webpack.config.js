@@ -30,17 +30,16 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@system': path.join(__dirname, 'react'),
+      '@root': path.join(__dirname, 'react'),
       '@components': path.join(__dirname, 'react', 'components'),
-      '@pages': path.join(__dirname, 'react', 'pages'),
-      '@styles': path.join(__dirname, 'react', 'styles'),
-
+      '@pages': path.join(__dirname, 'react', 'pages')
     }
   },
 
   // IMPORTANT: Do not bundle react and react-dom
   externals: {
     '@geum/admin': '@geum/admin',
+    '@geum/components': '@geum/components',
     'react': 'react',
     'react-dom': 'react-dom',
     'react-pose': 'react-pose',
