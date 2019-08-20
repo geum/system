@@ -1,0 +1,181 @@
+{
+  "text": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "email": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "password": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "search": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "url": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "color": {
+    "type": "VARCHAR",
+    "length": 7
+  },
+  "mask": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "slug": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "textarea": {
+    "type": "TEXT"
+  },
+  "wysiwyg": {
+    "type": "TEXT"
+  },
+  "markdown": {
+    "type": "TEXT"
+  },
+  "code": {
+    "type": "TEXT"
+  },
+  "number": {
+    "type": "INT"
+  },
+  "small": {
+    "type": "INT",
+    "length": 1,
+    "attribute": "unsigned"
+  },
+  "range": {
+    "type": "INT"
+  },
+  "float": {
+    "type": "FLOAT"
+  },
+  "price": {
+    "type": "FLOAT",
+    "length": "10,2"
+  },
+  "stars": {
+    "type": "FLOAT",
+    "length": "10,1"
+  },
+  "date": {
+    "type": "date"
+  },
+  "time": {
+    "type": "time"
+  },
+  "datetime": {
+    "type": "datetime"
+  },
+  "week": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "month": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "checkbox": {
+    "type": "INT",
+    "length": 1,
+    "attribute": "unsigned"
+  },
+  "switch": {
+    "type": "INT",
+    "length": 1,
+    "attribute": "unsigned"
+  },
+  "select": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "countrylist": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "multiselect": {
+    "type": "JSON"
+  },
+  "checkboxes": {
+    "type": "JSON"
+  },
+  "radios": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "file": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "image": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "filelist": {
+    "type": "JSON"
+  },
+  "imagelist": {
+    "type": "JSON"
+  },
+  "tag": {
+    "type": "JSON"
+  },
+  "textlist": {
+    "type": "JSON"
+  },
+  "textarealist": {
+    "type": "JSON"
+  },
+  "wysiwyglist": {
+    "type": "JSON"
+  },
+  "meta": {
+    "type": "JSON"
+  },
+  "multirange": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "latlng": {
+    "type": "JSON"
+  },
+  "rawjson": {
+    "type": "JSON"
+  },
+  "fieldset": {
+    "type": "JSON"
+  },
+  "table": {
+    "type": "JSON"
+  },
+  "uuid": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "ipaddress": {
+    "type": "VARCHAR",
+    "length": 255
+  },
+  "active": {
+    "type": "INT",
+    "length": 1,
+    "null": false,
+    "default": 1,
+    "attribute": "UNSIGNED"
+  },
+  "created": {
+    "type": "datetime",
+    "null": false
+  },
+  "updated": {
+    "type": "datetime",
+    "null": false
+  }
+}
