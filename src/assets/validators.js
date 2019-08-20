@@ -10,14 +10,20 @@ module.exports = {
   date_lt(value, challenge) {},
   date_lte(value, challenge) {},
 
-  is_date(value) {},
-  is_datetime(value) {},
+  is_date(value) {
+    //format: ^YYYY-MM-DD$
+  },
+  is_datetime(value) {
+    //format: ^YYYY-MM-DD HH:MM:SS$
+  },
   is_email(value) {},
   is_float(value) {},
   is_hex(value) {},
   is_number(value) {},
   is_price(value) {},
-  is_time(value) {},
+  is_time(value) {
+    //format: ^HH:MM:SS$
+  },
   is_url(value) {},
 
   number_gt(value, challenge) {},
@@ -33,6 +39,6 @@ module.exports = {
   word_lt(value, challenge) {},
   word_lte(value, challenge) {},
 
-  valid_option(value, challenge) {}
-  valid_regexp(value, challenge) {},
+  valid_option(value, challenge) {},
+  valid_regexp(value, challenge) {}
 };
