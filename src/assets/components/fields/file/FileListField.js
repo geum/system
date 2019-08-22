@@ -2,7 +2,6 @@ const File = require('./FileField');
 
 class FileListField extends File {
 
-
   get schema() {
     return { type: 'JSON' };
   }

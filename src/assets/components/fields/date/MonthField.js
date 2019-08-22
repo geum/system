@@ -10,15 +10,4 @@ class MonthField extends Text {
     this.props['data-do'] = 'time-field';
     this.props.type = 'month';
   }
-
-  /**
-   * What happens before it is inserted/updated
-   *
-   * @param {String} value
-   *
-   * @return {String}
-   */
-  prepare(value) {
-    return new Date(value).toISOString().slice(0, 19).replace('T', ' ');
-  }
 }

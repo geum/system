@@ -9,5 +9,6 @@ class TextareaField extends Text {
   constructor() {
     super();
     this.props['class'] = 'form-control system-form-control';
+    return React.createElement('textarea', this.props);
   }
 }

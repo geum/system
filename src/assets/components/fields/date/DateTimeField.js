@@ -14,6 +14,7 @@ class DateTimeField extends Text {
     this.props['aria-haspopup']= 'true';
     this.props['aria-expanded']= 'false';
     this.props['class'] = 'form-control date system-form-control';
+    this.props['data-do'] = 'datetime-field';
     this.props.type = 'text';
   }
 

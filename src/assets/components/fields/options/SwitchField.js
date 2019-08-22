@@ -5,7 +5,7 @@ class SwitchField extends React.Component {
    * @var {String} attributes - What kind of SQL schema
    */
   get schema() {
-    return { type: 'INT', length: 1, attribute: "unsigned" };
+    return { type: 'INT', length: 1, attribute: 'unsigned' };
   }
 
   /**

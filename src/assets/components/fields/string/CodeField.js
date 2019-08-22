@@ -10,5 +10,6 @@ class CodeField extends Text {
     super();
     this.props['class'] = 'form-control system-form-control';
     this.props['data-do'] = 'code-editor';
+    return React.createElement('textarea', this.props);
   }
 }

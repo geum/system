@@ -3,7 +3,7 @@ const Text = require('../string/TextField');
 class SmallField extends Text {
 
   get schema() {
-    return { type: 'INT', length: 1, attribute: "unsigned" };
+    return { type: 'INT', length: 1, attribute: 'unsigned' };
   }
 
   constructor() {

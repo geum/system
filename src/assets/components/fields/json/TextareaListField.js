@@ -47,11 +47,11 @@ class TextareaField extends Tag {
                   <i class="fas fa-times"></i>
               </a>
           </div>
-      </div>
-      <a class="field-add btn btn-success" href="javascript:void(0)">
+      </div>);
+    const btn = (<a class="field-add btn btn-success" href="javascript:void(0)">
           <i class="fas fa-plus"></i>
           <span>{{_ 'Add'}}</span>
       </a>);
-    return React.createElement('div', this.props, div);
+    return React.createElement('div', this.props, div, btn);
   }
 }

@@ -3,7 +3,7 @@ const Text = require('../string/TextField');
 class StarsField extends Text {
 
   get schema() {
-    return { type: 'FLOAT', length: "10,1"};
+    return { type: 'FLOAT', length: '10,1'};
   }
 
   constructor() {

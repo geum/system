@@ -10,5 +10,6 @@ class WysiwygField extends Text {
     super();
     this.props['class'] = 'form-control system-form-control';
     this.props['data-do'] = 'wysiwyg';
+    return React.createElement('textarea', this.props);
   }
 }
