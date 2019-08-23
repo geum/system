@@ -8,6 +8,10 @@ class SelectField extends React.Component {
     return { type: 'VARCHAR', length: 255 };
   }
 
+  get types(){
+    return ['file', 'json'];
+  }
+
   /**
    * @var {Object} attributes - Setter only
    */
@@ -53,6 +57,7 @@ class SelectField extends React.Component {
   constructor() {
     super();
     this.props['class'] = 'form-control system-form-control'
+    this.props.name = this.state.key;
   }
 
   /**
@@ -61,14 +66,9 @@ class SelectField extends React.Component {
    * @return {Component}
    */
   render() {
-    const drop = ({{#each config.options}}
-            <option
-                value="{{./key}}"
-                {{#when ../this '==' key}}selected{{/when}}
-            >
-                {{value}}
-            </option>
-        {{/each}});
-    return React.createElement('select', this.props, drop);
+    return (
+      React.createElement('select', this.props,
+      React.createElement('option',{value: this.state.key})
+    );
   }
 }

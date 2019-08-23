@@ -1,15 +1,10 @@
-const Text = require('./TextField');
+const Textarea = require('./TextareaField');
 
-class CodeField extends Text {
-
-  get schema() {
-    return { type: 'TEXT'};
-  }
+class CodeField extends Textarea {
 
   constructor() {
     super();
-    this.props['class'] = 'form-control system-form-control';
+    this.props['class'] = 'form-control hidden system-form-control';
     this.props['data-do'] = 'code-editor';
-    return React.createElement('textarea', this.props);
   }
 }

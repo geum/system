@@ -8,6 +8,10 @@ class RadiosField extends React.Component {
     return { type: 'VARCHAR', length: 255 };
   }
 
+  get types(){
+    return ['file', 'json'];
+  }
+
   /**
    * @var {Object} attributes - Setter only
    */
@@ -58,20 +62,16 @@ class RadiosField extends React.Component {
    * Render as a field
    *
    * @return {Component}
-   */
+   */ //
   render() {
-    const radio = ({{#each config.options}}
-            <label class="radio radio-2">
-                <input
-                    class="system-form-control"
-                    name="{{../@key}}"
-                    type="radio"
-                    value="{{./key}}"
-                    {{#when ../this '==' key}}checked{{/when}}
-                />
-                <span>{{value}}</span>
-            </label>
-        {{/each}});
-    return React.createElement('div', this.props, radio);
+    return (
+      React.createElement('div', this.props,
+      React.createElement('label', {class: 'radio radio-2'},
+      React.createElement('input', {class: 'system-form-control',
+      name: this.state.key,
+      type: 'radio',
+      value: this.state.key}),
+      React.createElement('span', this.state.value)))
+    );
   }
 }

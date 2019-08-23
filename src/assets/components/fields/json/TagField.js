@@ -8,6 +8,10 @@ class TagField extends React.Component {
     return { type: 'JSON' };
   }
 
+  get types(){
+    return ['file'];
+  }
+
   /**
    * @var {Object} attributes - Setter only
    */
@@ -54,6 +58,7 @@ class TagField extends React.Component {
     super();
     this.props['data-do']= 'tag-field';
     this.props['class']= 'tag-field';
+    this.props['data-name'] = this.state.key;
   }
 
   /**
@@ -62,20 +67,16 @@ class TagField extends React.Component {
    * @return {Component}
    */
   render() {
-    const div = (<div class="tag">
-                <input
-                    class="tag-input text-field system-form-control"
-                    type="text"
-                    name="{{../@key}}[]"
-                    value="{{this}}"
-                />
-                <a
-                    class="remove"
-                    href="javascript:void(0)"
-                >
-                    <i class="fa fa-times"></i>
-                </a>
-            </div>);
-    return React.createElement('div', this.props, div);
+    return (
+      React.createElement('div', this.props,
+      React.createElement('div', {class: 'tag'},
+      React.createElement('input', {class: 'tag-input text-field system-form-control',
+      type: 'text',
+      name: this.state.key[],
+      value: this.state.value}),
+      React.createElement('a', {class: 'remove',
+      href: 'javascript:void(0)'},
+      React.createElement('i', {class: 'fa fa-times'}))))
+    );
   }
 }

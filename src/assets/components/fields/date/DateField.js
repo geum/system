@@ -6,16 +6,17 @@ class DateField extends Text {
    */
 
    get schema() {
-     return { type: 'date'};
+     return { type: 'date' };
    }
 
   constructor() {
     super();
+    this.props['autocomplete'] = 'off';
     this.props['aria-haspopup']= 'true';
     this.props['aria-expanded']= 'false';
     this.props['class'] = 'form-control date system-form-control';
     this.props['data-do'] = 'date-field';
-    this.props.type = 'date';
+    this.props.type = 'text'; //was date
   }
 
   /**

@@ -3,7 +3,7 @@ const Text = require('../string/TextField');
 class PriceField extends Text {
 
   get schema() {
-    return { type: 'FLOAT', length: "10,2" };
+    return { type: 'FLOAT', length: '10,2' };
   }
 
   constructor() {

@@ -1,15 +1,9 @@
-const Text = require('./TextField');
+const Textarea = require('./TextareaField');
 
-class MarkdownField extends Text {
-
-  get schema() {
-    return { type: 'TEXT'};
-  }
+class MarkdownField extends Textarea {
 
   constructor() {
     super();
-    this.props['class'] = 'form-control system-form-control';
     this.props['data-do'] = 'markdown-editor';
-    return React.createElement('textarea', this.props);
   }
 }

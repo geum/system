@@ -8,6 +8,10 @@ class CountryListField extends React.Component {
     return { type: 'VARCHAR', length: 255 };
   }
 
+  get types(){
+    return ['file', 'json'];
+  }
+
   /**
    * @var {Object} attributes - Setter only
    */
@@ -52,8 +56,9 @@ class CountryListField extends React.Component {
    */
   constructor() {
     super();
-    this.props['class'] = 'system-form-control'
-    this.props['data-do'] = 'country-dropdown'
+    this.props['class'] = 'system-form-control';
+    this.props['data-do'] = 'country-dropdown';
+    this.props.name = this.state.key;
   }
 
   /**

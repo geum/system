@@ -8,6 +8,10 @@ class RawJsonField extends React.Component {
     return { type: 'JSON' };
   }
 
+  get types(){
+    return ['file'];
+  }
+
   /**
    * @var {Object} attributes - Setter only
    */

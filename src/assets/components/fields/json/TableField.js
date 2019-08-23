@@ -17,14 +17,15 @@ class TableField extends Tag {
    * @return {Component}
    */
   render() {
-    const table = (<table class ="table table-striped"><thead><tr><th>Header</th></tr></thead><tbody><tr><td>Body</td></tr></tbody></table>);
-    const btn = (<a
-            class="row-add btn btn-success"
-            href="javascript:void(0)"
-        >
-            <i class="fas fa-plus"></i>
-            <span>{{_ 'Add Row'}}</span>
-        </a>);
-    return React.createElement('div', this.props, table, btn);
+    const head = (<thead><tr><th>Header</th></tr></thead>);
+    const body = (<tbody><tr><td>Body</td></tr></tbody>);
+    return (
+      React.createElement('div', this.props,
+      React.createElement('table',{class: 'table table-striped'}, head, body),
+      React.createElement('a',{class: 'row-add btn btn-success',
+      href: 'javascript:void(0)'},
+      React.createElement('i', {class: 'fas fa-plus'},
+      React.createElement('span', 'Add Row'))))
+    );
   }
 }

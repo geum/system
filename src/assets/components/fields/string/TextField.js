@@ -56,7 +56,10 @@ class TextField extends React.Component {
    */
   constructor() {
     super();
+    this.props['autocomplete'] = this.state.name;
+    this.props['name'] = this.state.key;
     this.props.type = 'text';
+    this.state.key = this.state;
   }
 
   /**

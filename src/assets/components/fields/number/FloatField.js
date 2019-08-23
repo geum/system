@@ -3,7 +3,7 @@ const Text = require('../string/TextField');
 class FloatField extends Text {
 
   get schema() {
-    return { type: 'FLOAT'};
+    return { type: 'FLOAT' };
   }
 
   constructor() {

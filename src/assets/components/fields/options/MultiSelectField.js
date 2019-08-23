@@ -8,6 +8,10 @@ class MultiSelectField extends Select {
     return { type: 'JSON' };
   }
 
+  get types(){
+    return ['file'];
+  }
+
   static isJsonType(){
     return true;
   }
@@ -32,14 +36,9 @@ class MultiSelectField extends Select {
    * @return {Component}
    */
   render() {
-    const drop = ({{#each config.options}}
-            <option
-                value="{{./key}}"
-                {{#when ../this '==' key}}selected{{/when}}
-            >
-                {{value}}
-            </option>
-        {{/each}});
-    return React.createElement('select', this.props, drop);
+    return (
+      React.createElement('select', this.props,
+      React.createElement('option',{value: this.state.key})
+    );
   }
 }

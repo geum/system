@@ -3,7 +3,7 @@ const Text = require('../string/TextField');
 class NumberField extends Text {
 
   get schema() {
-    return { type: 'INT'};
+    return { type: 'INT' };
   }
 
   constructor() {

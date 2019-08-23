@@ -1,9 +1,52 @@
-const Text = require('../string/TextField');
+const React = require('react');
 
-class StarsField extends Text {
+class StarsField extends React.Component {
 
   get schema() {
-    return { type: 'FLOAT', length: '10,1'};
+    return { type: 'FLOAT', length: '10,1' };
+  }
+
+  get types(){
+    return ['file', 'json'];
+  }
+
+  /**
+   * @var {Object} attributes - Setter only
+   */
+  set attributes(attributes) {
+    if (typeof attributes !== 'object') {
+      //dont add
+      return;
+    }
+
+    Object.assign(this.props, attributes);
+  }
+
+  /**
+   * @var {Object} options - Setter only
+   */
+  set options(options) {
+    if (typeof options !== 'object') {
+      //dont add
+      return;
+    }
+
+    this.options = options;
+  }
+
+  /**
+   * @var {String} value - Setter only
+   */
+  set value(value) {
+    this.props.value = value;
+  }
+
+  static isJsonType(){
+    return false;
+  }
+
+  static isFileType(){
+    return false;
   }
 
   constructor() {
@@ -13,51 +56,70 @@ class StarsField extends Text {
   }
 
   render(){
-    const star = ({{#if config.attributes.data-max}}
-            {{#stars this config.attributes.data-max}}
-                <div class="star d-inline-block">
-                    {{#when this '===' 'half'}}
-                        <i class="fas fa-star-half-alt text-warning"></i>
-                    {{/when}}
-
-                    {{#when this '===' 'whole'}}
-                        <i class="fas fa-star text-warning"></i>
-                    {{/when}}
-
-                    {{#when this '===' 'empty'}}
-                        <i class="far fa-star"></i>
-                    {{/when}}
-                </div>
-            {{/stars}}
-        {{else}}
-            {{#stars this 5}}
-                <div class="star d-inline-block">
-                    {{#when this '===' 'half'}}
-                        <i class="fas fa-star-half-alt text-warning"></i>
-                    {{/when}}
-
-                    {{#when this '===' 'whole'}}
-                        <i class="fas fa-star text-warning"></i>
-                    {{/when}}
-
-                    {{#when this '===' 'empty'}}
-                        <i class="far fa-star"></i>
-                    {{/when}}
-                </div>
-            {{/stars}}
-        {{/if}});
-    const inp = (<input
-            autocomplete="{{name}}"
-            class="form-control system-form-control hidden"
-            step="0.5"
-            min="0"
-            name="{{@key}}"
-            type="number"
-            value="{{this}}"
-            {{#each config.attributes}}
-                {{@key}}="{{this}}"
-            {{/each}}
-        />);
-    return React.createElement('div', this.props, star, inp);
+    if (config.attributes['data-max']){
+      if (stars.config.attributes['data-max'] == 'half'){
+        return (React.createElement('div', {class: 'star d-inline-block'},
+          React.createElement('i', {class: 'fas fa-star-half-alt text-warning'}),
+          React.createElement('input', {autocomplete: this.state.name,
+          class: 'form-control system-form-control hidden',
+          step: '0.5',
+          min: '0',
+          name: this.state.key,
+          type: 'number',
+          value: this.props.value})));
+      } else if (stars.config.attributes['data-max'] == 'whole'){
+        return (React.createElement('div', {class: 'star d-inline-block'},
+          React.createElement('i', {class: 'fas fa-star text-warning'}),
+          React.createElement('input', {autocomplete: this.state.name,
+          class: 'form-control system-form-control hidden',
+          step: '0.5',
+          min: '0',
+          name: this.state.key,
+          type: 'number',
+          value: this.props.value})));
+      } else if (stars.config.attributes['data-max'] == 'empty'){
+        return (React.createElement('div', {class: 'star d-inline-block'},
+          React.createElement('i', {class: 'far fa-star'}),
+          React.createElement('input', {autocomplete: this.state.name,
+          class: 'form-control system-form-control hidden',
+          step: '0.5',
+          min: '0',
+          name: this.state.key,
+          type: 'number',
+          value: this.props.value})));
+      }
+    } else { //definitely not right
+      if (stars == 'half'){
+        return (React.createElement('div', {class: 'star d-inline-block'},
+          React.createElement('i', {class: 'fas fa-star-half-alt text-warning'}),
+          React.createElement('input', {autocomplete: this.state.name,
+          class: 'form-control system-form-control hidden',
+          step: '0.5',
+          min: '0',
+          name: this.state.key,
+          type: 'number',
+          value: this.props.value})));
+      } else if (stars == 'whole'){
+        return (React.createElement('div', {class: 'star d-inline-block'},
+          React.createElement('i', {class: 'fas fa-star text-warning'}),
+          React.createElement('input', {autocomplete: this.state.name,
+          class: 'form-control system-form-control hidden',
+          step: '0.5',
+          min: '0',
+          name: this.state.key,
+          type: 'number',
+          value: this.props.value})));
+      } else if (stars == 'empty'){
+        return (React.createElement('div', {class: 'star d-inline-block'},
+          React.createElement('i', {class: 'far fa-star'}),
+          React.createElement('input', {autocomplete: this.state.name,
+          class: 'form-control system-form-control hidden',
+          step: '0.5',
+          min: '0',
+          name: this.state.key,
+          type: 'number',
+          value: this.props.value})));
+      }
+    }
   }
 }

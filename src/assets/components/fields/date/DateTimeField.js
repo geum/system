@@ -6,11 +6,12 @@ class DateTimeField extends Text {
    */
 
    get schema() {
-     return { type: 'datetime'};
+     return { type: 'datetime' };
    }
 
   constructor() {
     super();
+    this.props['autocomplete'] = 'off';
     this.props['aria-haspopup']= 'true';
     this.props['aria-expanded']= 'false';
     this.props['class'] = 'form-control date system-form-control';

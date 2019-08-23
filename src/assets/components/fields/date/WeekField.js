@@ -6,6 +6,7 @@ class WeekField extends Text {
    */
   constructor() {
     super();
+    this.props['autocomplete'] = 'off';
     this.props['class'] = 'form-control system-form-control';
     this.props.type = 'week';
   }

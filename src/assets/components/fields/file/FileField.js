@@ -8,6 +8,10 @@ class FileField extends React.Component {
     return { type: 'VARCHAR', length: 255 };
   }
 
+  get types(){
+    return ['json'];
+  }
+
   /**
    * @var {Object} attributes - Setter only
    */
@@ -53,7 +57,8 @@ class FileField extends React.Component {
   constructor() {
     super();
     this.props['class'] = 'table table-striped file-field';
-    this.props['data-do'] = 'file-field'
+    this.props['data-do'] = 'file-field';
+    this.props['data-name'] = this.state.key;
     this.props.type = 'file';
   }
 

@@ -6,6 +6,7 @@ class MonthField extends Text {
    */
   constructor() {
     super();
+    this.props['autocomplete'] = 'off';
     this.props['class'] = 'form-control system-form-control';
     this.props['data-do'] = 'time-field';
     this.props.type = 'month';

@@ -8,6 +8,10 @@ class CheckboxesField extends React.Component {
     return { type: 'JSON' };
   }
 
+  get types(){
+    return ['file'];
+  }
+
   /**
    * @var {Object} attributes - Setter only
    */
@@ -60,18 +64,14 @@ class CheckboxesField extends React.Component {
    * @return {Component}
    */
   render() {
-    const checkbox = (<{{#each config.options}}
-            <label class="checkbox checkbox-2">
-                <input
-                    class="system-form-control"
-                    name="{{../@key}}[]"
-                    type="checkbox"
-                    value="{{./key}}"
-                    {{#when ../this '==' key}}checked{{/when}}
-                />
-                <span>{{value}}</span>
-            </label>
-        {{/each}});
-    return React.createElement('div', this.props, checkbox);
+    return (
+      React.createElement('div', this.props,
+      React.createElement('label', {class: 'checkbox checkbox-2'},
+      React.createElement('input', {class: 'system-form-control',
+      name: this.state.key,
+      type: 'checkbox',
+      value: this.state.key}),
+      React.createElement('span', this.state.value)))
+    );
   }
 }

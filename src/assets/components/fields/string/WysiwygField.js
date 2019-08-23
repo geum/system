@@ -1,15 +1,9 @@
-const Text = require('./TextField');
+const Textarea = require('./TextareaField');
 
-class WysiwygField extends Text {
-
-  get schema() {
-    return { type: 'TEXT'};
-  }
+class WysiwygField extends Textarea {
 
   constructor() {
     super();
-    this.props['class'] = 'form-control system-form-control';
     this.props['data-do'] = 'wysiwyg';
-    return React.createElement('textarea', this.props);
   }
 }

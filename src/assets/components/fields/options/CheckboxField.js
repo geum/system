@@ -8,6 +8,10 @@ class CheckboxField extends React.Component {
     return { type: 'INT', length: 1, attribute: 'unsigned' };
   }
 
+  get types(){
+    return ['file', 'json'];
+  }
+
   /**
    * @var {Object} attributes - Setter only
    */
@@ -55,6 +59,7 @@ class CheckboxField extends React.Component {
     this.props['class'] = 'system-form-control'
     this.props.type = 'hidden';
     this.props.value = '0';
+    this.props.name = this.state.key;
   }
 
   /**
@@ -63,19 +68,13 @@ class CheckboxField extends React.Component {
    * @return {Component}
    */
   render() {
-    const checkbox = (<label class="checkbox checkbox-2">
-        <input
-            class="system-form-control"
-            name="{{@key}}"
-            type="checkbox"
-            value="1"
-            {{#when this '==' 1}}checked{{/when}}
-            {{#each config.attributes}}
-                {{@key}}="{{this}}"
-            {{/each}}
-        />
-        <span>{{config.attributes.placeholder}}</span>
-    </label>);
-    return React.createElement('input', this.props, checkbox);
+    return (
+      React.createElement('input', this.props,
+      React.createElement('label', {class: 'checkbox checkbox-2'},
+      React.createElement('input', {class: 'system-form-control',
+      name: 'this.state.key',
+      type: 'checkbox',
+      value: '1'})))
+    );
   }
 }
