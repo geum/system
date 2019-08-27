@@ -8,7 +8,7 @@
   "author": "Christian Blanquera <cblanquera@sterlingtech.ph>",
   "license": "MIT",
   "dependencies": {
-    "geum": "0.0.5",
+    "geum": "0.0.7",
     "knex": "^0.19.1",
     "mime": "1.6.0",
     "mysql": "^2.17.1",

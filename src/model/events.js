@@ -1,5 +1,5 @@
 const path = require('path');
-const { app, EventEmitter, Helper } = require('geum');
+const { app, Helper } = require('geum');
 
 const Exception = require('./Exception');
 
@@ -127,7 +127,7 @@ app.on('system-model-remove', async(req, res) => {
   const data = req.getStage();
 
   if (!data[schema.primary]) {
-    const detail = await app.request('system-model.detail', data);
+    const detail = await app.request('system-model-detail', data);
     if (!detail) {
       return res.setError(true, 'Invalid ID');
     }

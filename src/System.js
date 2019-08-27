@@ -1,15 +1,19 @@
-const { app } = require('geum');
+const { app, Registry } = require('geum');
 
 const Store = require('./Store');
 const Exception = require('./Exception');
 
+const validators = require('./assets/validators');
+const fields = require('./assets/components/fields');
+const formats = require('./assets/components/formats');
+
 class System {
   get store() {
-    if (!this.cache.store) {
-      this.cache.store = Store.load(app.get('store'));
+    if (!this.cache.has('store')) {
+      this.cache.set('store', Store.load(app.get('store')));
     }
 
-    return this.cache.store;
+    return this.cache.get('store');
   }
 
   /**
@@ -27,7 +31,16 @@ class System {
    * @return {System}
    */
   constructor() {
-    this.cache = { config: {} };
+    this.cache = Registry.load({ config: {} });
+
+    this.registry = Registry.load({
+      validator: validators,
+      field: fields,
+      format: formats
+    });
+
+    //allows interfaces to be manually changed
+    this.FieldsetInterface = System.FieldsetInterface;
   }
 
   /**
@@ -53,11 +66,11 @@ class System {
    */
   config(file, key = null, value = null) {
     //we dont have it cache
-    if (typeof this.cache.config[file] === 'undefined') {
+    if (!this.cache.has('config', file)) {
       try {
-        this.cache.config[file] = require(path.join(this.path('config'), file));
+        this.cache.set('config', file, require(path.join(this.path('config'), file)));
       } catch(e) {
-        this.cache.config[file] = {};
+        this.cache.set('config', file, {});
       }
     }
 
@@ -70,32 +83,47 @@ class System {
 
     if (value === null) {
       if (key === null) {
-        return this.cache.config[file];
+        return this.cache.get('config', file);
       }
 
-      if (typeof this.cache.config[file][key] === 'undefined') {
+      if (!this.cache.has('config', file, key)) {
         return null;
       }
 
-      return this.cache.config[file][key];
+      return this.cache.get('config', file, key);
     }
 
     //write operations
 
     if (key !== null) {
-      this.cache.config[file][key] = value;
+      this.cache.set('config', file, key, value);
     } else if (typeof value !== 'object') {
       return this;
     } else {
-      this.cache.config[file] = value;
+      this.cache.set('config', file, value);
     }
 
     fs.writeFileSync(path.join(
       this.path('config'), file + '.json'),
-      JSON.stringify(this.cache.config[file])
+      JSON.stringify(this.cache.get('config', file))
     );
 
     return this;
+  }
+
+  /**
+   * Returns a fieldset
+   *
+   * @param {(String|Object)} name
+   *
+   * @return {Fieldset}
+   */
+  fieldset(name) {
+    if (typeof name === 'object') {
+      return new this.FieldsetInterface(name);
+    }
+
+    return new this.FieldsetInterface({ name });
   }
 
   /**
@@ -134,5 +162,8 @@ class System {
     return this.store.schema(schema);
   }
 }
+
+//allows interfaces to be manually changed
+System.FieldsetInterface = Fieldset;
 
 module.exports = System;

@@ -1,9 +1,7 @@
 const path = require('path');
-const { Registry, Helper } = require('geum');
+const { app, Registry, Helper } = require('geum');
 
 const Exception = require('./Exception');
-const formatters = require('./assets/formatters');
-const validators = require('./assets/validators');
 
 class Fieldset extends Registry {
   /**
@@ -37,9 +35,18 @@ class Fieldset extends Registry {
    */
   get files() {
     const results = [];
+    const types = [];
+
+    app.system.registry.each('field', (name) => {
+      const Field = app.system.registry.get('field', name);
+
+      if (Field.types.indexOf('file') !== -1) {
+        types.push(name);
+      }
+    });
+
     this.fields.forEach(field => {
       const name = this.name + '_' + field.name;
-      const types = ['file', 'image', 'filelist', 'imagelist'];
 
       if(types.indexOf(field.field.type) !== -1) {
         results.push(name);
@@ -54,24 +61,18 @@ class Fieldset extends Registry {
    */
   get json() {
     const results = [];
+    const types = [];
+
+    app.system.registry.each('field', (name) => {
+      const Field = app.system.registry.get('field', name);
+
+      if (Field.types.indexOf('json') !== -1) {
+        types.push(name);
+      }
+    });
+
     this.fields.forEach(field => {
       const name = this.name + '_' + field.name;
-      const types = [
-        'filelist',
-        'imagelist',
-        'tag',
-        'textlist',
-        'textarealist',
-        'wysiwyglist',
-        'meta',
-        'checkboxes',
-        'multirange',
-        'rawjson',
-        'multiselect',
-        'fieldset',
-        'table',
-        'latlng'
-      ];
 
       if(types.indexOf(field.field.type) !== -1) {
         results.push(name);
@@ -130,30 +131,24 @@ class Fieldset extends Registry {
   }
 
   /**
-   * @var {Array} slugs - gets all slug fields
-   */
-  get slugs() {
-    const results = [];
-    this.fields.forEach(field => {
-      const name = this.name + '_' + field.name;
-
-      if(field.field.type === 'slug') {
-        results.push(name);
-      }
-    });
-
-    return results;
-  }
-
-  /**
    * @var {Array} uniques - gets all unique fields
    */
   get uniques() {
     const results = [];
+    const types = [];
+
+    app.system.registry.each('field', (name) => {
+      const Field = app.system.registry.get('field', name);
+
+      if (Field.types.indexOf('unique') !== -1) {
+        types.push(name);
+      }
+    });
+
     this.fields.forEach(field => {
       const name = this.name + '_' + field.name;
 
-      if(field.field.type === 'uuid') {
+      if(types.indexOf(field.field.type) !== -1) {
         results.push(name);
         return;
       }
@@ -167,23 +162,6 @@ class Fieldset extends Registry {
           results.push(name);
         }
       });
-    });
-
-    return results;
-  }
-
-  /**
-   * @var {Array} uniques - gets all uuid fields
-   */
-  get uuids() {
-    const results = [];
-    this.fields.forEach(field => {
-      const name = this.name + '_' + field.name;
-
-      if(field.field.type === 'uuid') {
-        results.push(name);
-        return;
-      }
     });
 
     return results;
@@ -208,18 +186,20 @@ class Fieldset extends Registry {
    *
    * @return {Fieldset}
    */
-  addField(name, config) {
-    config = config || {};
+  addField(name, field) {
+    field = Object.assign({
+      value: '',
+      validation: [],
+      format: { list: {}, detail: {} }
+    }, field || {});
 
-    if (!config.type || typeof config.type !== 'string') {
-      throw Exception.for('config.type is not valid')
+    if (!field.type || typeof field.type !== 'string') {
+      throw Exception.for('field.type is required');
     }
 
-    config.value = config.value || '';
-    config.validation = config.validation || [];
-
-    config.list = config.list || [];
-    config.detail = config.detail || [];
+    if (!app.system.registry.has('field', field.type)) {
+      throw Exception.for('field.type %s is not registered', field.type);
+    }
 
     return this.set('fields', '', config);
   }
@@ -234,6 +214,14 @@ class Fieldset extends Registry {
    * @return {Fieldset}
    */
   addFormat(name, type, format) {
+    if (!format.type || typeof format.type !== 'string') {
+      throw Exception.for('format.type is required');
+    }
+
+    if (!app.system.registry.has('format', format.type)) {
+      throw Exception.for('format.type %s is not registered', format.type);
+    }
+
     if (!this.fields.length) {
       throw Exception.for('Adding format for undefined field %s', name);
     }
@@ -262,6 +250,14 @@ class Fieldset extends Registry {
    * @return {Fieldset}
    */
   addValidation(name, validation) {
+    if (!validation.type || typeof validation.type !== 'string') {
+      throw Exception.for('validation.type is required');
+    }
+
+    if (!app.system.registry.has('validator', validation.type)) {
+      throw Exception.for('validation.type %s is not registered', format.type);
+    }
+
     if (!this.fields.length) {
       throw Exception.for('Adding validation for undefined field %s', name);
     }
@@ -282,60 +278,65 @@ class Fieldset extends Registry {
   }
 
   /**
+   * Returns field information given name
+   *
+   * @param {String} name
+   *
+   * @return {Object}
+   */
+  getField(name) {
+    let field = null;
+    for (let index in this.fields) {
+      if (this.fields[index].name === name) {
+        //clone
+        field = Object.assign({}, this.fields[index]);
+        break;
+      }
+    }
+
+    if (!field) {
+      return null;
+    }
+
+    field.component = app.system.registry('field', field.type);
+    //clone
+    field.format = Object.assign({}, field.format);
+    //loop through the formats
+    Object.keys(field.format).forEach(name => {
+      //clone
+      const format = field.format[name] = Object.assign({}, field.format[name]);
+      format.component = app.system.registry('format', format.type);
+    });
+
+    return field;
+  }
+
+  /**
    * Removes keys from the data that is not defined in the fieldset
    *
    * @param {Object} data
    *
    * @return {Object}
    */
-  getFields(data) {
+  getValues(data) {
     let fields = {};
 
     //add the other fields
     this.fields.forEach(field => {
       if (typeof data[field.name] !== 'undefined') {
-        fields[field.name] = data[field.name];
-      } else if (typeof field.value !== 'undefined') {
-        fields[field.name] = field.value;
+        fields[field.name] = app.system
+          .registry('field', field.type)
+          .prepare(data[field.name]);
+
+        return;
       }
+
+      fields[field.name] = app.system
+        .registry('field', field.type)
+        .prepare(field.value);
     });
 
     return fields;
-  }
-
-  /**
-   * Returns format give type
-   *
-   * @param {Object} data
-   *
-   * @return {Object}
-   */
-  async getFormat(type, data) {
-    let errors = {};
-
-    Object.keys(this.fields).forEach(name => {
-      const formats = this.fields[name].format || {};
-
-      if (!formats[type]) {
-        return;
-      }
-
-      if (typeof formats[type] === 'function') {
-        data[name] = await formats[type](data[name], data);
-        return;
-      }
-
-      const formatter = formatters[formats[type].method];
-
-      if (typeof formatter !== 'function') {
-        return;
-      }
-
-      const parameters = formats[type].parameters || [];
-      data[name] = await formatter(data[name], ...parameters);
-    });
-
-    return data;
   }
 
   /**

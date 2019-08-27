@@ -23,22 +23,6 @@ class Store {
 
     //allows interfaces to be manually changed
     this.SchemaInterface = Store.SchemaInterface;
-    this.FieldsetInterface = Store.FieldsetInterface;
-  }
-
-  /**
-   * Returns a fieldset
-   *
-   * @param {(String|Object)} name
-   *
-   * @return {Fieldset}
-   */
-  fieldset(table) {
-    if (typeof table === 'object') {
-      return new this.FieldsetInterface(table);
-    }
-
-    return new this.FieldsetInterface({ name: table });
   }
 
   /**
@@ -364,7 +348,6 @@ Definition(Store).implements(StoreInterface);
 
 //allows interfaces to be manually changed
 Store.SchemaInterface = Schema;
-Store.FieldsetInterface = Fieldset;
 
 //adapter
 module.exports = Store;
