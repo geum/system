@@ -5,17 +5,9 @@ class LatLngField extends Text {
   get schema() {
     return { type: 'JSON'};
   }
-  
+
   get types(){
-    return ['file'];
-  }
-
-  static isJsonType(){
-    return true;
-  }
-
-  static isFileType(){
-    return false;
+    return [ 'json' ];
   }
 
   constructor() {

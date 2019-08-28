@@ -9,7 +9,7 @@ class CheckboxesField extends React.Component {
   }
 
   get types(){
-    return ['file'];
+    return [ 'json' ];
   }
 
   /**
@@ -41,14 +41,6 @@ class CheckboxesField extends React.Component {
    */
   set value(value) {
     this.props.value = value;
-  }
-
-  static isJsonType(){
-    return true;
-  }
-
-  static isFileType(){
-    return false;
   }
 
   /**

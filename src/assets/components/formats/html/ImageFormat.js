@@ -28,9 +28,14 @@ class ImageFormat extends React.Component {
    *
    * @return {Component}
    */
+
   render() {
     return (
-      <a href="mailto:{this.props.value}">{this.props.parameters[0]}</a>
+      <img
+        src="{this.props.value}"
+        width={!!(this.props.parameters[0]) ? "{this.props.parameters[0]}" : false}
+        height={!!(this.props.parameters[1]) ? "{this.props.parameters[1]}" : false}
+      />
     );
   }
 }

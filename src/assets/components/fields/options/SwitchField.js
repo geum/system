@@ -9,7 +9,7 @@ class SwitchField extends React.Component {
   }
 
   get types(){
-    return ['file', 'json'];
+    return [];
   }
 
   /**
@@ -41,14 +41,6 @@ class SwitchField extends React.Component {
    */
   set value(value) {
     this.props.value = value;
-  }
-
-  static isJsonType(){
-    return false;
-  }
-
-  static isFileType(){
-    return false;
   }
 
   /**

@@ -3,15 +3,7 @@ const File = require('./FileField');
 class ImageField extends File {
 
   get types(){
-    return ['json'];
-  }
-
-  static isJsonType(){
-    return false;
-  }
-
-  static isFileType(){
-    return true;
+    return [ 'file' ];
   }
 
   constructor() {

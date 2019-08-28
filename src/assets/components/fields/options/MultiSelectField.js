@@ -9,15 +9,7 @@ class MultiSelectField extends Select {
   }
 
   get types(){
-    return ['file'];
-  }
-
-  static isJsonType(){
-    return true;
-  }
-
-  static isFileType(){
-    return false;
+    return [ 'json' ];
   }
 
   /**

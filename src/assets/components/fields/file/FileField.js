@@ -9,7 +9,7 @@ class FileField extends React.Component {
   }
 
   get types(){
-    return ['json'];
+    return [ 'file' ];
   }
 
   /**
@@ -41,14 +41,6 @@ class FileField extends React.Component {
    */
   set value(value) {
     this.props.value = value;
-  }
-
-  static isJsonType(){
-    return false;
-  }
-
-  static isFileType(){
-    return true;
   }
 
   /**

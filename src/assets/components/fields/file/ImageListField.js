@@ -7,15 +7,7 @@ class ImageListField extends File {
   }
 
   get types(){
-    return [];
-  }
-
-  static isJsonType(){
-    return true;
-  }
-
-  static isFileType(){
-    return true;
+    return [ 'file','json' ];
   }
 
   constructor() {
