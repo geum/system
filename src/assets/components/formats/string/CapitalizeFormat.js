@@ -12,7 +12,7 @@ class CapitalizeFormat extends React.Component {
    * @var {String} value - Setter only
    */
   set value(value) {
-    this.props.value = value.charAt(0).toUpperCase() + value.slice(1);
+    this.props.value = value.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ');
   }
 
   /**

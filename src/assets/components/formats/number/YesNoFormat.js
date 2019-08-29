@@ -12,9 +12,9 @@ class YesNoFormat extends React.Component {
    * @var {String} value - Setter only
    */
   set value(value) {
-    if (value.toLowerCase() == "yes"){
+    if (value == "1"){
       this.props.value = "Yes";
-    } else if (value.toLowerCase() == "no"){
+    } else if (value == "2"){
       this.props.value = "No";
     }
   }

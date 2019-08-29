@@ -1,3 +1,4 @@
+//using 'moment' ( https://momentjs.com/ )
 const React = require('react');
 
 class DateFormat extends React.Component {
@@ -20,7 +21,7 @@ class DateFormat extends React.Component {
    */
   set value(value) {
     if (value){
-      this.props.value = value;
+      this.props.value = moment(value, "YYYY-MM-DD").format(this.props.parameters[0]);
     }
   }
 

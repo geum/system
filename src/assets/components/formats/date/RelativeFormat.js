@@ -21,7 +21,7 @@ class RelativeFormat extends React.Component {
    */
   set value(value) {
     if (value){
-      this.props.value = moment(value, "YYYYMMDD").fromNow();;
+      this.props.value = moment(value, "YYYY-MM-DD").fromNow();
     }
   }
 

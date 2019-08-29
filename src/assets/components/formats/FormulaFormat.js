@@ -14,10 +14,11 @@ class FormulaFormat extends React.Component {
    * @var {String} value - Setter only
    */
   set value(value) {
-    //using the formula in the placeholder
-    var arr = value.split(" ");
+    //using the formula given
+    //removes the {{}} and then works with whatever is inputted
+    var next = value.replace(/{{}}/g,'');
 
-    this.props.value = (arr[0] * arr[1])/10;
+    this.props.value = eval(next);
   }
 
   /**
