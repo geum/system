@@ -15,8 +15,8 @@ class FormulaFormat extends React.Component {
    */
   set value(value) {
     //using the formula given
-    //removes the {{}} and then works with whatever is inputted
-    var next = value.replace(/{{}}/g,'');
+    //removes the {{}} (THIS is a WRONG regex) and then works with whatever is inputted
+    var next = value.replace(/{}/gi,'');
 
     this.props.value = eval(next);
   }
